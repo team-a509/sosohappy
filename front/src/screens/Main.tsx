@@ -24,6 +24,7 @@ const Main = ({socket, chatSocket}: propsType) => {
   const {userInfo, login, logout} = useStore();
   const navigation =  useNavigation();
   const [helpStatus, setHelpStatus] = useState('');
+  const [fortuneOpenStatus, setFortuneOpenStatus] = useState<boolean>(false);
 
   const onToast = (text: string) => {
     ToastAndroid.showWithGravity(
@@ -113,8 +114,11 @@ const Main = ({socket, chatSocket}: propsType) => {
 
   useEffect(() => {
     if (!userInfo) return
-    getFortuneList();
     getHelpStatus();
+    if(!fortuneOpenStatus){
+      getFortuneList();
+      setFortuneOpenStatus(true);
+    }
   }, [userInfo?.memberId])
 
   useEffect(() => {

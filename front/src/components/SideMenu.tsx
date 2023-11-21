@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, Alert, Image, ToastAndroid} from "react-native"
+import {View, Text, TouchableOpacity, Alert, Image, ToastAndroid, Linking} from "react-native"
 import SideMenuStyle from "@/styles/SideMenuStyle";
 import {useNavigation} from "@react-navigation/native";
 import { sosohappyWhiteLogo, user, gear, chat, peace, home, close, menuDocs } from "@/assets/icons/icons";
@@ -217,7 +217,7 @@ const SideMenu = ({closeSide, nowPage, isVisible}: props) => {
                                     {/*        <Text style={[SideMenuStyle.menuItemText]}>정보수정</Text>*/}
                                     {/*    </View>*/}
                                     {/*</TouchableOpacity>*/}
-                                    <TouchableOpacity activeOpacity={0.7} onPress={() => checkUserGoto('Certificate')}>
+                                    <TouchableOpacity activeOpacity={0.7} onPress={() => Linking.openURL("http://sosohappy.co.kr:8888/docs")}>
                                         <View style={[SideMenuStyle.menuList]}>
                                             <SvgXml
                                                 xml={menuDocs}
