@@ -30,12 +30,12 @@ interface propsType{
 
 const Chat = ({helpSocket, chatSocket}: propsType) => {
   const [msg, setMsg] = useState<string>("");
-  const [roomNo, setroomNo] = useState<number|null>(null);
   const route = useRoute();
   // const [otherMemberId, setOtherMemberId] = useState<string>(route.params?.otherMemberId);
   const {userInfo} = useStore();
   const navigation = useNavigation();
   const [isVisible, setIsVisible] = useState(false);
+  const [roomNo, setRoomNo] = useState<number|null>(null);
 
   const openSide = () => {
     setIsVisible(true);
@@ -47,13 +47,20 @@ const Chat = ({helpSocket, chatSocket}: propsType) => {
 
 
   const sendMsg = async () => {
-    if(roomNo){
-      const sendChatRes = await chatApi.sendChat({roomNo: roomNo, sendMemberId: userInfo.memberId, receiveMemberId:route.params?.otherMemberId, content:msg});
+    try {
+      const sendChatRes = await chatApi.sendChat({
+        roomNo: roomNo,
+        sendMemberId: userInfo.memberId,
+        receiveMemberId:route.params?.otherMemberId,
+        content:msg
+      });
       if(sendChatRes.status === 200){
         setMsg("");
       }else{
         Alert.alert("시스템 에러, 관리자에게 문의하세요.");
       }
+    } catch (err) {
+      console.log(err)
     }
   }
 
@@ -61,6 +68,7 @@ const Chat = ({helpSocket, chatSocket}: propsType) => {
     const roomNoRes = await chatApi.makeChatRoom({senderMemberId:userInfo.memberId, receiveMemberId:otherMemberId});
     if(roomNoRes.data.status === "success"){
       chatSocket.getDetail(roomNoRes.data.result.chatRoomId);
+      setRoomNo(roomNoRes.data.result.chatRoomId)
     }
   }
 
