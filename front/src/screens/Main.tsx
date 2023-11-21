@@ -113,11 +113,16 @@ const Main = ({socket, chatSocket}: propsType) => {
   )
 
   useEffect(() => {
-    if (!userInfo) return
+    if (!userInfo) {
+      return
+    }
     getHelpStatus();
     if(!fortuneOpenStatus){
-      getFortuneList();
-      setFortuneOpenStatus(true);
+      setFortuneOpenStatus((prev) => {
+        if (prev) return true
+        getFortuneList();
+        return true
+      });
     }
   }, [userInfo?.memberId])
 
