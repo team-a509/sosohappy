@@ -54,7 +54,7 @@
                 const bl = new Blob(htmlContent, { type: 'text/html' });
                 const a = document.createElement('a');
                 a.href = URL.createObjectURL(bl);
-                a.download = 'test-document';
+                a.download = '소소행증명서';
                 a.hidden = true;
                 document.body.appendChild(a);
                 a.click();
