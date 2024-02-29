@@ -28,6 +28,7 @@
 <img src="exec/capture/persona1.PNG" width="250"/>
 <img src="exec/capture/persona2.PNG" width="250"/>
 
+
 ### 페르소나 분석
 
 1. 매일 빨리 갈 수 있는 돌아가는 지체장애를 갖고있는 A님,
